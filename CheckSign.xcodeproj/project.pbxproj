@@ -14,6 +14,13 @@
 		B83D44322DAF3BBA00F95B42 /* CheckSignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44312DAF3BBA00F95B42 /* CheckSignTests.swift */; };
 		B83D443C2DAF3BBA00F95B42 /* CheckSignUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D443B2DAF3BBA00F95B42 /* CheckSignUITests.swift */; };
 		B83D443E2DAF3BBA00F95B42 /* CheckSignUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D443D2DAF3BBA00F95B42 /* CheckSignUITestsLaunchTests.swift */; };
+		B83D444D2DAF3E4A00F95B42 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D444C2DAF3E4A00F95B42 /* EventListView.swift */; };
+		B83D444F2DAF3E6C00F95B42 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D444E2DAF3E6C00F95B42 /* EventDetailView.swift */; };
+		B83D44512DAF3E8B00F95B42 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44502DAF3E8B00F95B42 /* EventViewModel.swift */; };
+		B83D44532DAF3EA100F95B42 /* OrganizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44522DAF3EA100F95B42 /* OrganizationViewModel.swift */; };
+		B83D44552DAF3EBF00F95B42 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44542DAF3EBF00F95B42 /* AuthViewModel.swift */; };
+		B83D44572DAF3ED500F95B42 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44562DAF3ED500F95B42 /* models.swift */; };
+		B83D44592DAF65B400F95B42 /* OrganizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44582DAF65B400F95B42 /* OrganizationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +52,13 @@
 		B83D44372DAF3BBA00F95B42 /* CheckSignUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckSignUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83D443B2DAF3BBA00F95B42 /* CheckSignUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSignUITests.swift; sourceTree = "<group>"; };
 		B83D443D2DAF3BBA00F95B42 /* CheckSignUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSignUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B83D444C2DAF3E4A00F95B42 /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
+		B83D444E2DAF3E6C00F95B42 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		B83D44502DAF3E8B00F95B42 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		B83D44522DAF3EA100F95B42 /* OrganizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewModel.swift; sourceTree = "<group>"; };
+		B83D44542DAF3EBF00F95B42 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		B83D44562DAF3ED500F95B42 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
+		B83D44582DAF65B400F95B42 /* OrganizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +111,13 @@
 			children = (
 				B83D441F2DAF3BB800F95B42 /* CheckSignApp.swift */,
 				B83D44212DAF3BB800F95B42 /* ContentView.swift */,
+				B83D444C2DAF3E4A00F95B42 /* EventListView.swift */,
+				B83D444E2DAF3E6C00F95B42 /* EventDetailView.swift */,
+				B83D44502DAF3E8B00F95B42 /* EventViewModel.swift */,
+				B83D44522DAF3EA100F95B42 /* OrganizationViewModel.swift */,
+				B83D44582DAF65B400F95B42 /* OrganizationView.swift */,
+				B83D44542DAF3EBF00F95B42 /* AuthViewModel.swift */,
+				B83D44562DAF3ED500F95B42 /* models.swift */,
 				B83D44232DAF3BBA00F95B42 /* Assets.xcassets */,
 				B83D44252DAF3BBA00F95B42 /* CheckSign.entitlements */,
 				B83D44262DAF3BBA00F95B42 /* Preview Content */,
@@ -259,7 +280,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B83D444F2DAF3E6C00F95B42 /* EventDetailView.swift in Sources */,
+				B83D44592DAF65B400F95B42 /* OrganizationView.swift in Sources */,
+				B83D44532DAF3EA100F95B42 /* OrganizationViewModel.swift in Sources */,
 				B83D44222DAF3BB800F95B42 /* ContentView.swift in Sources */,
+				B83D44572DAF3ED500F95B42 /* models.swift in Sources */,
+				B83D44552DAF3EBF00F95B42 /* AuthViewModel.swift in Sources */,
+				B83D444D2DAF3E4A00F95B42 /* EventListView.swift in Sources */,
+				B83D44512DAF3E8B00F95B42 /* EventViewModel.swift in Sources */,
 				B83D44202DAF3BB800F95B42 /* CheckSignApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,9 +468,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Personal.CheckSign;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.jackgerraughty.checkinapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,9 +507,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Personal.CheckSign;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.jackgerraughty.checkinapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

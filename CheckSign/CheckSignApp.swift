@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
-struct CheckSignApp: App {
+struct CheckInApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                LoginView()
+            }
+            .modelContainer(for: [User.self, Organization.self, Event.self])
         }
     }
 }
