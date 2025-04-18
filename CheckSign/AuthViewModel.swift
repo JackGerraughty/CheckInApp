@@ -12,16 +12,25 @@ import CoreLocation
 import SwiftData
 
 class AuthViewModel: ObservableObject {
+    @Published var loginError: String? = nil
     @Published var isAuthenticated = false
     @Published var user: User?
     var context: ModelContext?
-
+    
     func signIn(phone: String, password: String) {
         guard let context = context else { return }
-        let request = FetchDescriptor<User>(predicate: #Predicate { $0.phoneNumber == phone && $0.password == password })
-        if let result = try? context.fetch(request).first {
-            self.user = result
-            self.isAuthenticated = true
+
+        let userRequest = FetchDescriptor<User>(predicate: #Predicate { $0.phoneNumber == phone })
+        if let user = try? context.fetch(userRequest).first {
+            if user.password == password {
+                self.user = user
+                self.isAuthenticated = true
+                self.loginError = nil
+            } else {
+                self.loginError = "The password for this phone number is incorrect."
+            }
+        } else {
+            self.loginError = "This phone number is not registered. Please sign up instead."
         }
     }
 

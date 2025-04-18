@@ -14,16 +14,36 @@ import SwiftData
 class OrganizationViewModel: ObservableObject {
     @Published var organizations: [Organization] = []
     @Published var currentOrg: Organization?
-    @Environment(\.modelContext) private var context
+    var context: ModelContext?
     
-    func createOrganization(name: String) {
+    func createOrganization(name: String, for user: User) {
+        guard let context = context else { return }
         let org = Organization(name: name)
+        org.members.append(user.phoneNumber)
         context.insert(org)
-        try? context.save()
-        organizations.append(org)
+        do {
+            try context.save()
+            organizations.append(org)
+            fetchOrganizations(for: user)
+        } catch {
+            print("❌ Failed to save organization: \(error.localizedDescription)")
+        }
     }
     
     func joinOrganization(withLink link: String) {
         // Decode link to find org ID and join
     }
+    
+    func fetchOrganizations(for user: User) {
+        guard let context = context else { return }
+
+        do {
+            let allOrgs = try context.fetch(FetchDescriptor<Organization>())
+            self.organizations = allOrgs.filter { $0.members.contains(user.phoneNumber) }
+        } catch {
+            print("❌ Failed to fetch organizations: \(error.localizedDescription)")
+        }
+    }
+
+
 }
