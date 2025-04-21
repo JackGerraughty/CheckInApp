@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 import CoreLocation
 import SwiftData
-import SwiftUI
 
 // MARK: - Views
 struct LoginView: View {
@@ -196,28 +195,28 @@ struct ProfileView: View {
                     orgVM.fetchOrganizations(for: user)
                 }
                 } else {
-                    ScrollView {
-                        VStack(spacing: 12) {
-                            ForEach(orgVM.organizations) { org in
-                                Button(action: {
-                                    orgVM.currentOrg = org
-                                }) {
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text(org.name)
-                                                .font(.headline)
-                                            Text("Members: \(org.members.count)")
-                                                .font(.subheadline)
+                    NavigationStack{
+                        ScrollView {
+                            VStack(spacing: 12) {
+                                ForEach(orgVM.organizations) { org in
+                                    NavigationLink(destination: OrganizationView(organization: org)) {
+                                        HStack {
+                                            VStack(alignment: .leading) {
+                                                Text(org.name)
+                                                    .font(.headline)
+                                                Text("Members: \(org.members.count)")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.gray)
+                                            }
+                                            Spacer()
+                                            Image(systemName: "chevron.right")
                                                 .foregroundColor(.gray)
                                         }
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.gray)
+                                        .padding()
+                                        .background(Color.white)
+                                        .cornerRadius(10)
+                                        .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
                                     }
-                                    .padding()
-                                    .background(Color.white)
-                                    .cornerRadius(10)
-                                    .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
                                 }
                             }
                         }
@@ -327,15 +326,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
-
-struct CheckInTabView: View {
-    var body: some View {
-        Text("Check In Screen")
-            .font(.title)
-            .padding()
-    }
-}
-
 
 
 // MARK: - Location Manager

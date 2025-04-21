@@ -16,7 +16,7 @@ struct EventListView: View {
 
     var body: some View {
         List(eventVM.events) { event in
-            NavigationLink(destination: EventDetailView(event: event, eventVM: eventVM)) {
+            NavigationLink(destination: EventDetailView(event: event)) {
                 VStack(alignment: .leading) {
                     Text(event.title)
                         .font(.headline)

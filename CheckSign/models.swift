@@ -19,13 +19,16 @@ class Event: Identifiable {
     var latitude: Double
     var longitude: Double
     var attendees: [String]
+    var address: String
+    
 
-    init(title: String, date: Date, latitude: Double, longitude: Double, attendees: [String] = []) {
+    init(title: String, date: Date, latitude: Double, longitude: Double, attendees: [String] = [], address: String) {
         self.title = title
         self.date = date
         self.latitude = latitude
         self.longitude = longitude
         self.attendees = attendees
+        self.address = address
     }
 
     var location: CLLocationCoordinate2D {
@@ -52,6 +55,7 @@ class Organization: Identifiable {
     @Attribute(.unique) var id: String = UUID().uuidString
     var name: String
     var members: [String] // User IDs
+    var events: [Event] = [] // ✅ NEW
 
     init(name: String, members: [String] = []) {
         self.name = name

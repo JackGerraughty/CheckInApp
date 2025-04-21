@@ -21,6 +21,7 @@
 		B83D44552DAF3EBF00F95B42 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44542DAF3EBF00F95B42 /* AuthViewModel.swift */; };
 		B83D44572DAF3ED500F95B42 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44562DAF3ED500F95B42 /* models.swift */; };
 		B83D44592DAF65B400F95B42 /* OrganizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D44582DAF65B400F95B42 /* OrganizationView.swift */; };
+		B83D445B2DB5ADCD00F95B42 /* CheckInTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D445A2DB5ADCD00F95B42 /* CheckInTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		B83D44542DAF3EBF00F95B42 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		B83D44562DAF3ED500F95B42 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		B83D44582DAF65B400F95B42 /* OrganizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationView.swift; sourceTree = "<group>"; };
+		B83D445A2DB5ADCD00F95B42 /* CheckInTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				B83D44212DAF3BB800F95B42 /* ContentView.swift */,
 				B83D444C2DAF3E4A00F95B42 /* EventListView.swift */,
 				B83D444E2DAF3E6C00F95B42 /* EventDetailView.swift */,
+				B83D445A2DB5ADCD00F95B42 /* CheckInTabView.swift */,
 				B83D44502DAF3E8B00F95B42 /* EventViewModel.swift */,
 				B83D44522DAF3EA100F95B42 /* OrganizationViewModel.swift */,
 				B83D44582DAF65B400F95B42 /* OrganizationView.swift */,
@@ -282,6 +285,7 @@
 			files = (
 				B83D444F2DAF3E6C00F95B42 /* EventDetailView.swift in Sources */,
 				B83D44592DAF65B400F95B42 /* OrganizationView.swift in Sources */,
+				B83D445B2DB5ADCD00F95B42 /* CheckInTabView.swift in Sources */,
 				B83D44532DAF3EA100F95B42 /* OrganizationViewModel.swift in Sources */,
 				B83D44222DAF3BB800F95B42 /* ContentView.swift in Sources */,
 				B83D44572DAF3ED500F95B42 /* models.swift in Sources */,

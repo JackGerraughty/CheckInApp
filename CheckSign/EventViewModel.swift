@@ -18,8 +18,8 @@ class EventViewModel: ObservableObject {
     private let locationManager = CLLocationManager()
     @Environment(\.modelContext) private var context
 
-    func createEvent(title: String, location: CLLocationCoordinate2D) {
-        let newEvent = Event(title: title, date: Date(), latitude: location.latitude, longitude: location.longitude)
+    func createEvent(title: String, address: String, location: CLLocationCoordinate2D) {
+        let newEvent = Event(title: title, date: Date(), latitude: location.latitude, longitude: location.longitude, address: address)
         context.insert(newEvent)
         try? context.save()
         events.append(newEvent)
@@ -32,4 +32,5 @@ class EventViewModel: ObservableObject {
             checkedIn = true
         }
     }
+    
 }
