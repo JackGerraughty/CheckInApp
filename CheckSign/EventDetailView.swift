@@ -85,5 +85,3 @@ struct EventDetailView: View {
         .padding()
     }
 }
-
-
