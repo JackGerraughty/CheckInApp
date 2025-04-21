@@ -80,7 +80,7 @@ struct MainTabView: View {
     @StateObject private var orgVM = OrganizationViewModel()
     var body: some View {
         TabView {
-            CheckInTabView()
+            CheckInTabView(user: user)
                 .tabItem {
                     Label("Check In", systemImage: "checkmark.circle.fill")
                 }
@@ -98,6 +98,7 @@ struct MainTabView: View {
         .onAppear {
             orgVM.context = context
             orgVM.fetchOrganizations(for: user)
+            Task { await orgVM.syncFromServer(for: user) }
         }
     }
 }
@@ -327,20 +328,130 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 }
 
+struct CheckInTabView: View {
+    let user: User                                           // ← inject from caller
+    
+    @Environment(\.modelContext) private var context
+    @StateObject private var locationManager = LocationManager()
+    
+    /// All events, ordered soon‑>late (SwiftData query is live & auto‑updates)
+    @Query(sort: \Event.date) private var allEvents: [Event]
+    
+    @State private var alertMessage = ""
+    @State private var showAlert    = false
+    
+    /// Acceptable radius, metres
+    private let matchRadius: CLLocationDistance = 50
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            Button(action: handleCheckIn) {
+                ZStack {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 180, height: 180)
+                        .shadow(radius: 6)
+                    
+                    Text("Check In")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+            }
+            .buttonStyle(.plain)
+            .alert(alertMessage, isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            
+            Spacer()
+        }
+        .onAppear {
+            locationManager.request()
+        }
+    }
+    
+    // MARK: – Check‑in logic
+    private func handleCheckIn() {
+        guard let userLoc = locationManager.lastLocation else {
+            setAlert("Location unavailable. Enable permissions and try again.")
+            return
+        }
+        
+        // 1 Find the soonest event the user is registered for, in the future (≥ now)
+        let candidate = allEvents
+            .first { $0.date >= Date() && $0.attendees.contains(user.phoneNumber) }
+        
+        guard let event = candidate else {
+            setAlert("You have no upcoming registered events.")
+            return
+        }
+        
+        let eventLoc = CLLocation(latitude:  event.latitude,
+                                  longitude: event.longitude)
+        let distance = userLoc.distance(from: eventLoc)          // metres
+        
+        if distance <= matchRadius {
+            markAttendance(for: event, user: user)
+            setAlert("All good!")
+        } else {
+            setAlert("You are not in the correct location, try again.")
+        }
+    }
+    
+    // Persist the successful check‑in
+    private func markAttendance(for event: Event, user: User) {
+        if !event.attendees.contains(user.phoneNumber) {
+            event.attendees.append(user.phoneNumber)
+            try? context.save()
+        }
+    }
+    
+    private func setAlert(_ message: String) {
+        alertMessage = message
+        showAlert    = true
+    }
+}
+
+
 
 // MARK: - Location Manager
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     @Published var lastLocation: CLLocation?
-
+    @Published var status: CLAuthorizationStatus = .notDetermined
+    
     override init() {
         super.init()
         manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = 10 // Updates every 10 meters
     }
-
+    
+    func request() {
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation() // Continuously update instead of one-time request
+        default:
+            break
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastLocation = locations.first
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager failed with error: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.status = status
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            manager.startUpdatingLocation()
+        }
     }
 }
