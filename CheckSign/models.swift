@@ -56,9 +56,18 @@ class Organization: Identifiable {
     var name: String
     var members: [String] // User IDs
     var events: [Event] = [] // ✅ NEW
+    
+    var latitude: Double
+    var longitude: Double
 
-    init(name: String, members: [String] = []) {
+    init(name: String, members: [String] = [], latitude: Double = 0, longitude: Double = 0) {
         self.name = name
         self.members = members
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        .init(latitude: latitude, longitude: longitude)
     }
 }
