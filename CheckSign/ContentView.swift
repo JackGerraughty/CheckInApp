@@ -87,7 +87,7 @@ struct MainTabView: View {
 
             CreateOrganizationView(orgVM: orgVM, user: user)
                 .tabItem {
-                    Label("Create Event", systemImage: "calendar.badge.plus")
+                    Label("Create Organization", systemImage: "calendar.badge.plus")
                 }
 
             ProfileView(user: user)
@@ -123,8 +123,6 @@ struct ProfileView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .center)
                     HStack(spacing: 10) {
-                        Image(systemName: "link")
-                        Image(systemName: "line.3.horizontal")
                     }
                     .frame(width: 50, alignment: .trailing)
                 }
@@ -239,6 +237,9 @@ struct CreateOrganizationView: View {
     @State private var selectedImage: UIImage? = nil
     @State private var isPickerPresented = false
     var user: User
+    @State private var navigateToCheckIn = false
+    @State private var showAlert = false
+
     
     var body: some View {
         VStack(spacing: 20) {
@@ -279,12 +280,15 @@ struct CreateOrganizationView: View {
             }
             
             Spacer()
-            
+                .navigationDestination(isPresented: $navigateToCheckIn) {
+                    CheckInTabView()
+                }
+
             Button("Save") {
                 orgVM.createOrganization(name: orgName, for: user)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    dismiss()
-                }
+                orgName = ""
+                selectedImage = nil
+                showAlert = true
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -292,6 +296,9 @@ struct CreateOrganizationView: View {
             .foregroundColor(.white)
             .cornerRadius(10)
             .padding(.horizontal)
+        }
+        .alert("Your organization has been created!", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {}
         }
     }
 }
