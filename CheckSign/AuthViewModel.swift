@@ -15,6 +15,7 @@ class AuthViewModel: ObservableObject {
     @Published var loginError: String? = nil
     @Published var isAuthenticated = false
     @Published var user: User?
+    @Published var pendingLink: URL?
     var context: ModelContext?
     
     func signIn(phone: String, password: String) {
@@ -34,6 +35,13 @@ class AuthViewModel: ObservableObject {
         }
     }
 
+    @MainActor func consumePendingLink(using orgVM: OrganizationViewModel) {
+            if let link = pendingLink, let current = user {
+                try? orgVM.joinOrganization(withLink: link.absoluteString, user: current)
+                pendingLink = nil
+            }
+        }
+    
     func signUp(phone: String, password: String) {
         guard let context = context else { return }
         let newUser = User(phoneNumber: phone, password: password)
